@@ -15,6 +15,21 @@ def count_calls(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(method):
+    """Display the history of calls of a particular function."""
+    redis_instance = method.__self__._redis
+    input_key = f"{method.__qualname__}:inputs"
+    output_key = f"{method.__qualname__}:outputs"
+
+    inputs = redis_instance.lrange(input_key, 0, -1)
+    outputs = redis_instance.lrange(output_key, 0, -1)
+
+    print(f"{method.__qualname__} was called {len(inputs)} times:")
+    for input_, output in zip(inputs, outputs):
+        print(f"{method.__qualname__}(*{input_.decode('utf-8')}) -> "
+              f"{output.decode('utf-8')}")
+
+
 def call_history(method: Callable) -> Callable:
     """Call history decorator."""
     @wraps(method)
