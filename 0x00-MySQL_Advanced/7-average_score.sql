@@ -1,3 +1,4 @@
+-- calculate the average student score
 DELIMITER //
 CREATE PROCEDURE ComputeAverageScoreForUser(IN user_id INT)
 BEGIN
