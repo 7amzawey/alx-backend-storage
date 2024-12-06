@@ -1,4 +1,4 @@
--- create a view for those who need_meeting.
+-- Create a view for those who need_meeting
 CREATE VIEW need_meeting AS
 SELECT name, score
 FROM students
