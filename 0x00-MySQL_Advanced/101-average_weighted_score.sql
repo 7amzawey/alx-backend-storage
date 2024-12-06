@@ -1,3 +1,4 @@
+-- create a compute weighted socre average for users.
 DELIMITER $$
 
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
